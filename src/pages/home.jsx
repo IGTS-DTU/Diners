@@ -5,6 +5,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 
+import bgPic from "/bgPIC.png";
+
 function Home() {
   const handleLogin = async () => {
     try {
