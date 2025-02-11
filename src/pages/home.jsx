@@ -54,7 +54,7 @@ function Home() {
   }
   if(user){
     return     <div
-    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center bg-[url('./bgPIC.png')]"
+    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center" style={{ backgroundImage: `url(${bgPic})` }}
   >
    <img className="h-[15vh]  mb-8 mt-8" src={logo} alt="Logo" />
         <h2 className="text-white text-2xl mb-5 mt-10">{user.name}</h2>
@@ -72,7 +72,7 @@ function Home() {
     }
   return (
     <div
-    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center bg-[url('./bgPIC.png')]"
+    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center " style={{ backgroundImage: `url(${bgPic})` }}
   >
    <img className="h-[15vh]  mb-20 mt-10" src={logo} alt="Logo" />
    <h2 className="mb-20 font-mono text-4xl text-white [text-shadow:2px_2px_0px_black]">
