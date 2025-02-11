@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, loginWithGoogle,logout } from "../../firebaseConfig";
 import logo from "/igtsLOGO.png"
-import bgPic from "/bgPIC.png";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
@@ -10,6 +9,7 @@ function Home() {
   const handleLogin = async () => {
     try {
       const user = await loginWithGoogle();
+      console.log(user)
     } catch (error) {   
     }
   };
@@ -18,7 +18,7 @@ function Home() {
       onAuthStateChanged(auth, (user) => {
         setUser(user)
           if (user) {
-              localStorage.setItem("email", user.email);
+              localStorage.setItem("email", user.providerData[0]?.email);
               console.log("User is logged in");
             } else {
                 console.log("User is logged out");
@@ -54,11 +54,11 @@ function Home() {
   }
   if(user){
     return     <div
-    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center " style={{ backgroundImage: `url(${bgPic})` }}
+    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center bg-[url('./bgPIC.png')]"
   >
    <img className="h-[15vh]  mb-8 mt-8" src={logo} alt="Logo" />
         <h2 className="text-white text-2xl mb-5 mt-10">{user.name}</h2>
-       <div className="text-white text-2xl mb-10">{user.email}</div>
+       <div className="text-white text-2xl mb-10">{user.providerData[0]?.email}</div>
        
        <button className="h-14 w-[11.5rem] rounded-md border-4 border-black 
                    bg-black text-white text-2xl 
