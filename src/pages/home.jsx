@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { auth, db, loginWithGoogle,logout } from "../../firebaseConfig";
 import logo from "/igtsLOGO.png"
+import bgPic from "/bgPIC.png";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
@@ -53,7 +54,7 @@ function Home() {
   }
   if(user){
     return     <div
-    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center bg-[url('./bgPIC.png')]"
+    className="flex flex-col items-center text-lg text-center min-h-screen w-full bg-cover bg-center " style={{ backgroundImage: `url(${bgPic})` }}
   >
    <img className="h-[15vh]  mb-8 mt-8" src={logo} alt="Logo" />
         <h2 className="text-white text-2xl mb-5 mt-10">{user.name}</h2>
