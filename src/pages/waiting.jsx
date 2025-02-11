@@ -9,7 +9,7 @@ export default function WaitingPage(){
   useEffect(() => {
 
     const fetchIndex = async (poolno) => {
-        const users = await getDoc(doc(db,"IGTS", `uba`,"pool"+poolno,`users`));
+        const users = await getDoc(doc(db,"IGTS", `diners`,"pool"+poolno,`users`));
         //console.log(users.data().users);
         let userId = localStorage.getItem("email");
         console.log(userId)

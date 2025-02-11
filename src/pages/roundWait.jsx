@@ -8,7 +8,7 @@ export default function RoundWaiting(){
   const navigate=useNavigate();
   useEffect(() => {
     let pool=localStorage.getItem("pool");
-    const roundRef = doc(db, "IGTS","uba","pool"+pool,"details");
+    const roundRef = doc(db, "IGTS","diners","pool"+pool,"details");
     const startedornot = onSnapshot(roundRef, async(doc) => {
       if (doc.exists()) {
         if(doc.data().status){

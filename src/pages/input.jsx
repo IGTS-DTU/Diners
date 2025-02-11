@@ -12,7 +12,7 @@ export default function InputPage() {
   useEffect(() => {
     async function getRound() {
       let pool = localStorage.getItem("pool");
-      const roundRef = doc(db, "IGTS","uba","pool"+pool,"details"); 
+      const roundRef = doc(db, "IGTS","diners","pool"+pool,"details"); 
       let r=await getDoc(roundRef)
       setRound(r.data().round)
       localStorage.setItem("round",r.data().round)
@@ -25,13 +25,11 @@ export default function InputPage() {
   const submit = async (e) => {
     e.preventDefault(); 
     const formData = new FormData(e.target); 
-    const bid1 = formData.get("bid1");
-    const bid2 = formData.get("bid2");
-    const bid3 = formData.get("bid3");
+    const inp = formData.get("input");
     let pool = localStorage.getItem("pool");
     let index = localStorage.getItem("index");
-    const docRef = doc(db, "IGTS","uba","pool"+pool,"input"); 
-    const roundRef = doc(db, "IGTS","uba","pool"+pool,"details"); 
+    const docRef = doc(db, "IGTS","diners","pool"+pool,"input"); 
+    const roundRef = doc(db, "IGTS","diners","pool"+pool,"details"); 
     let rd=await getDoc(roundRef)
     let r=rd.data().round
     localStorage.setItem("round",r)
@@ -48,7 +46,7 @@ export default function InputPage() {
         if (index < 0 || index >= input.length) {
           throw new Error("Invalid index!");
         }
-        input["round"+r][index] = [Number(bid1),Number(bid2),Number(bid3)];
+        input["round"+r][index] = Number(inp);
         
         transaction.update(docRef, input );
       });
@@ -68,41 +66,18 @@ export default function InputPage() {
       {!isSubmit ? (
         <form onSubmit={submit} className="flex flex-col items-center mt-16 mb-12">
 <input
-  name="bid1"
+  name="input"
   type="number"
-  placeholder="Bid 1"
-  step="1"
-  min="1"
-  max="30"
+  placeholder="Input"
+  step="10"
+  min="0"
+  max="300"
   required
-className="h-15 mb-1 w-50  px-2  text-center text-5xl font-bold text-[#000000] placeholder-[#67325c] font-mono
-         bg-gray-300 rounded-xl border-3 border-black-500 shadow-inner 
+className="h-15 mb-1 w-50  px-2  text-center text-3xl font-bold text-[#000000] placeholder-[#67325c] font-mono
+         bg-gray-300 mt-16 mb-16 rounded-xl border-3 border-black-500 shadow-inner 
          focus:outline-none focus:ring-4 focus:ring-purple-500"
 />
-<input
-  name="bid2"
-  type="number"
-  placeholder="Bid 2"
-  step="1"
-  min="1"
-  max="30"
-  required
-className="h-15 mb-1 w-50  px-2  text-center text-5xl font-bold text-[#000000] placeholder-[#67325c] font-mono
-         bg-gray-300 rounded-xl border-3 border-black-500 shadow-inner 
-         focus:outline-none focus:ring-4 focus:ring-purple-500"
-/>
-<input
-  name="bid3"
-  type="number"
-  placeholder="Bid 3"
-  step="1"
-  min="1"
-  max="30"
-  required
-className="h-15 w-50  px-2  text-center text-5xl font-bold text-[#000000] placeholder-[#67325c] font-mono
-         bg-gray-300 rounded-xl border-3 border-black-500 shadow-inner 
-         focus:outline-none focus:ring-4 focus:ring-purple-500"
-/>
+
 <button
   type="submit"
   className="h-14 w-46  rounded-md border-4 border-black 
