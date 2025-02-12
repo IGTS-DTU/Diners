@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 import "./personalScore.css";
+import bgPic from "/bgPIC.png";
 import logo from "/igtsLOGO.png";
 
 const POOLS = ["Pool A", "Pool B", "Pool C", "Pool D", "Pool E"];
