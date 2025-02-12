@@ -4,6 +4,7 @@ import { db } from "../../firebaseConfig";
 import bgPic from "/bgPIC.png";
 //import "./personalScore.css";
 import logo from "/igtsLOGO.png"; 
+import { useNavigate } from "react-router-dom";
 
 const POOLS = ["Pool A", "Pool B", "Pool C", "Pool D", "Pool E"];
 
@@ -13,6 +14,7 @@ const PersonalScoreDiners = () => {
   const [scores, setScores] = useState([]);
   const [finalScore, setFinalScore] = useState(null);
   const [rank, setRank] = useState(null);
+  const navigate=useNavigate()
 
   useEffect(() => {
       const storedEmail = localStorage.getItem("email");
@@ -98,7 +100,7 @@ const PersonalScoreDiners = () => {
 
 
   return (
-    <div className="personal-score-container h-screen flex justify-center  bg-cover bg-center bg-[url('./bgPIC.png')] ">
+    <div className="personal-score-container h-screen flex justify-center  bg-cover  bg-center" style={{ backgroundImage: `url(${bgPic})` }}>
            
            <div className="score-card flex flex-col items-center ">
              <img src={logo}  alt="IGTS Logo" className="logo h-[15vh]  mb-8 mt-8" />

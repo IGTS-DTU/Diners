@@ -19,6 +19,20 @@ export default function WaitingPage(){
           localStorage.setItem("index", index);
         
     };
+
+    async function checkManualRoute() {
+          const startRef = doc(db, "IGTS","started"); 
+          let docRef=doc(db,"IGTS", "Users","pool",localStorage.getItem("email"));
+          const querySnapshot = await getDoc(docRef);
+          if(!querySnapshot.exists()){
+            navigate("/waiting")
+          }
+          let s=await getDoc(startRef)
+          if(!s.data().started){
+            navigate("/waiting")
+          }
+        }
+        checkManualRoute()
     
     const fetchPool = async () => {
       let docRef=doc(db,"IGTS", "Users","pool",localStorage.getItem("email"));
