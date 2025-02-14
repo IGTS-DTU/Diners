@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function InputPage() {
   const [isSubmit,setSubmit] = useState(false)
   const [round, setRound] = useState(0)
+  const [sent, setSent] = useState(false)
   const navigate=useNavigate()
   useEffect(() => {
     async function getRound() {
@@ -37,6 +38,7 @@ export default function InputPage() {
   }, []);
   const submit = async (e) => {
     e.preventDefault(); 
+    setSent(true)
     const formData = new FormData(e.target); 
     const inp = formData.get("input");
     let pool = localStorage.getItem("pool");
@@ -75,19 +77,20 @@ export default function InputPage() {
     <div className="flex flex-col items-center">
       <img className="h-[20vh] mb-5 mt-10" src={logo} alt="Logo" />
       <h2 className=" text-4xl font-bold text-white font-sans ">{String.fromCharCode(64 + Number(localStorage.getItem("pool")))}</h2>
-      <h2 className="text-3xl mt-2 text-white" style={{fontFamily:"arial"}}>ROUND {round}</h2>
+      <h2 className="text-3xl mt-2 text-white mb-16" style={{fontFamily:"arial"}}>ROUND {round}</h2>
       {!isSubmit ? (
         <form onSubmit={submit} className="flex flex-col items-center mt-16 mb-12">
+          {sent&&<div className="mb-2 text-white text-xl ">Sending input...</div>}
 <input
   name="input"
   type="number"
   placeholder="Input"
   step="10"
   min="0"
-  max="300"
+  max="250"
   required
 className="h-15 mb-1 w-50  px-2  text-center text-3xl font-bold text-[#000000] placeholder-[#67325c] font-mono
-         bg-gray-300 mt-16 mb-16 rounded-xl border-3 border-black-500 shadow-inner 
+         bg-gray-300 mb-16 rounded-xl border-3 border-black-500 shadow-inner 
          focus:outline-none focus:ring-4 focus:ring-purple-500"
 />
 
